@@ -1,0 +1,12 @@
+{
+   "customerName":"Test",
+   "customerMobile":"09081234567",
+   "address1":"test",
+   "address2":"test",
+   "account" : [
+    {
+        "accountType":"SAVINGS",
+        "availableBalance":10000.00
+    }
+   ]
+}
