@@ -1,0 +1,13 @@
+{
+   "customerName":"Test",
+   "customerMobile":"09081234567",
+   "customerEmail":"test@gmail.com",
+   "address1":"test",
+   "address2":"test",
+   "account" : [
+    {
+        "accountType":"SAVINGS",
+        "availableBalance":10000.00
+    }
+   ]
+}
