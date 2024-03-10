@@ -17,7 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -32,16 +32,19 @@ public class CustomerServiceImpl implements CustomerService {
 
 
         String pattern = "yyMMdd";
-        AtomicLong atomicLong = new AtomicLong(10000L);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-        Long customerNumber = Long.parseLong(simpleDateFormat.format(new Date()) + customer.getId());
+        UUID uuid = UUID.randomUUID();
+
+        String uuidString = uuid.toString().replaceAll("[^\\d]", "");
+        String firstThreeNumbers = uuidString.substring(0, Math.min(uuidString.length(), 3));
+        Long accountNumber = Long.parseLong(uuidString.substring(0, Math.min(uuidString.length(), 8)));
+        Long customerNumber = Long.parseLong(simpleDateFormat.format(new Date()) + firstThreeNumbers);
         customer.setCustomerNumber(customerNumber);
 
         Account account = new Account();
-        Long accountNumber = Long.parseLong(simpleDateFormat.format(new Date()) + account.getId());
 
         List<Account> accounts = new ArrayList<>();
-        account.setAccountNumber(atomicLong.incrementAndGet());
+        account.setAccountNumber(accountNumber);
         account.setAccountType(AccountType.SAVINGS);
         account.setAvailableBalance(0.0);
         account.setCustomer(customer);
