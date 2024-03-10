@@ -1,6 +1,5 @@
 package com.codingexam.customer.model.entity;
 
-import com.codingexam.customer.commons.AccountType;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -12,9 +11,10 @@ import java.util.List;
 @Table(name = "customer")
 public class Customer {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    @Column(name = "customer_number", length = 50, nullable = false, unique = true)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_number_generator")
+    @SequenceGenerator(name = "customer_number_generator", sequenceName = "customer_number_seq", allocationSize = 1)
+    private Long id;
+    @Column(name = "customer_number", length = 50, unique = true)
     private Long customerNumber;
     @Column(name = "customer_name", length = 50, nullable = false)
     private String customerName;
